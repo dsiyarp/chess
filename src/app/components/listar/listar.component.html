@@ -1,0 +1,54 @@
+
+
+<a routerLink="nuevo" class="btn btn-primary"><i class="far fa-plus-square"></i> Nuevo usuario </a>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="table-responsive">
+
+<table *ngIf="!loading" class="table mt-4 table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Avatar</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Activo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Email</th>
+      <th scope="col">Dirección</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Administrar</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    <tr *ngFor="let user of usuarios; let i = index">
+      <td>{{user.id}}</td>
+      <td>
+        <img *ngIf="user.imagen64.length > 300" src="data:image/jpeg;base64,{{user.imagen64}}" class="avatar rounded-circle"/>
+        <img *ngIf="user.imagen64.length < 300" src="./assets/img/no-image.jpg" class="avatar rounded-circle"/>
+      </td>
+      <td>{{user.usuario}}</td>
+      <td class="text-center">
+        <i *ngIf="user.activo" class="far fa-check-circle text-success"></i>
+        <i *ngIf="!user.activo" class="far fa-times-circle text-muted"></i>
+      </td>
+      <td>{{user.nombre}}</td>
+      <td>{{user.apellido}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.direccion}}</td>
+      <td>{{user.telefono}}</td>
+      <td>
+        <a routerLink="editar/{{user.id}}" class="">
+          <i class="far fa-edit"></i> Editar </a>
+        <br>
+        <a routerLink="eliminar/{{user.id}}" class="">
+          <i class="far fa-trash-alt"></i> Eliminar </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

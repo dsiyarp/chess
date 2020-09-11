@@ -1,0 +1,6 @@
+.avatar {
+  max-width: 60px !important;
+}
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

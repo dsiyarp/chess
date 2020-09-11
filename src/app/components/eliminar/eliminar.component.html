@@ -1,0 +1,24 @@
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="card">
+  <h4 class="card-header">Eliminar usuario</h4>
+  <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <h4>{{user.nombre}} {{user.apellido}} {{user.email}}</h4>
+        </div>
+
+          <input type="hidden" formControlName="id"/>
+
+          <div class="form-group">
+              <button [disabled]="loadingEliminar" class="btn btn-danger">
+                  <span *ngIf="loadingEliminar" class="spinner-border spinner-border-sm mr-1"></span>
+                  Si, eliminar
+              </button>
+              <a routerLink="/" class="btn btn-link">Cancelar</a>
+          </div>
+      </form>
+  </div>
+</div>
