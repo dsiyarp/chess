@@ -33,7 +33,7 @@ export class EliminarComponent implements OnInit {
         .subscribe((data: any) => {
           this.user = data;
           this.loading = false;
-          console.log(data);
+          //console.log(data);
         });
       // console.log(this.heroe);
     });
@@ -53,8 +53,6 @@ export class EliminarComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-    console.log(this.form.value);
 
     this.loadingEliminar = true;
 

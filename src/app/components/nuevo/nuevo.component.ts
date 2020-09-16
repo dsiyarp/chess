@@ -19,6 +19,7 @@ export class NuevoComponent implements OnInit {
   submitted = false;
   avatar = false;
   srcBase64: string;
+  errorImagen = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,9 +52,8 @@ export class NuevoComponent implements OnInit {
       return;
     }
 
-    console.log(this.form.value);
-
     this.loading = true;
+    this.errorImagen = false;
 
     this.usuario.addUsuario(this.form.value)
       .pipe(first())
@@ -62,7 +62,11 @@ export class NuevoComponent implements OnInit {
           this.router.navigate(['/'], { relativeTo: this.route });
         },
         error => {
+          console.log(error);
           this.loading = false;
+          if(error.status === 413){
+            this.errorImagen = true;
+          }
         });
 
   }
@@ -84,7 +88,7 @@ export class NuevoComponent implements OnInit {
       let imageToUpload = event.target.files.item(0);
       this.imageToBase64(fileReader, imageToUpload)
         .subscribe(base64image => {
-          console.log(base64image);
+          //console.log(base64image);
           this.setImagen64(base64image.split(',')[1]);
         });
     }

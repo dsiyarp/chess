@@ -7,7 +7,7 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
-          <h4>{{user.nombre}} {{user.apellido}} {{user.email}}</h4>
+          <h5>{{user.nombre}} {{user.apellido}} {{user.email}}</h5>
         </div>
 
           <input type="hidden" formControlName="id"/>
@@ -15,7 +15,7 @@
           <div class="form-group">
               <button [disabled]="loadingEliminar" class="btn btn-danger">
                   <span *ngIf="loadingEliminar" class="spinner-border spinner-border-sm mr-1"></span>
-                  Si, eliminar
+                  <i class="far fa-trash-alt"></i> Si, eliminar
               </button>
               <a routerLink="/" class="btn btn-link">Cancelar</a>
           </div>

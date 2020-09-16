@@ -27,8 +27,8 @@
     <tr *ngFor="let user of usuarios; let i = index">
       <td>{{user.id}}</td>
       <td>
-        <img *ngIf="user.imagen64.length > 300" src="data:image/jpeg;base64,{{user.imagen64}}" class="avatar rounded-circle"/>
-        <img *ngIf="user.imagen64.length < 300" src="./assets/img/no-image.jpg" class="avatar rounded-circle"/>
+        <img *ngIf="user.imagen64.length > 300" src="data:image/jpeg;base64,{{user.imagen64}}" class="avatar rounded-circle img-fluid"/>
+        <img *ngIf="user.imagen64.length < 300" src="./assets/img/no-image.jpg" class="avatar rounded-circle img-fluid"/>
       </td>
       <td>{{user.usuario}}</td>
       <td class="text-center">

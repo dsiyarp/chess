@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { first, pluck } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
 
 import { UsuariosService } from '../../services/usuarios.service';
 import { IUsuario } from 'src/app/interfaces/iusuario';
@@ -54,7 +55,6 @@ export class EditarComponent implements OnInit {
           }
 
         });
-      // console.log(this.heroe);
     });
 
   }
@@ -84,8 +84,6 @@ export class EditarComponent implements OnInit {
       return;
     }
 
-    console.log(this.form.value);
-
     this.loadingEditar = true;
 
     this.usuario.putUsuario(this.form.value)
@@ -109,6 +107,23 @@ export class EditarComponent implements OnInit {
       };
       reader.readAsDataURL(input.target.files[0]);
     }
+  }
+
+  onUploadImage(event) {
+    if (event.target.files.length > 0) {
+      const fileReader = new FileReader();
+      let imageToUpload = event.target.files.item(0);
+      this.imageToBase64(fileReader, imageToUpload)
+        .subscribe(base64image => {
+          //console.log(base64image);
+          this.setImagen64(base64image.split(',')[1]);
+        });
+    }
+  }
+
+  imageToBase64(fileReader: FileReader, fileToRead: File): Observable<string> {
+    fileReader.readAsDataURL(fileToRead);
+    return fromEvent(fileReader, 'load').pipe(pluck('currentTarget', 'result'));
   }
 
   setImagen64(base64) {
